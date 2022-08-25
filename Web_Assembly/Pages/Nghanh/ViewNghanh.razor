@@ -1,0 +1,38 @@
+﻿@page "/viewnghanh"
+
+<h3>Danh sách nghành</h3>
+
+<div class="row pb-2">
+    <input class="form-control col-md-4 m-3" @bind-value="seach" />
+    <button class="btn btn-primary m-3" @onclick="(()=>Timkiem(seach))"> Tìm kiếm </button>
+    <button class="btn btn-primary m-3" type="button" @onclick="Themmoi">Thêm mới</button>
+</div>
+@if (lstsv == null)
+{
+    <div>Loadding 99%...</div>
+}
+@if (lstsv != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã nghành</th>
+                <th>Tên nghành</th>               
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in lstsv)
+            {
+                <tr>
+                    <td>@x.Ma</td>
+                    <td>@x.TenNghanh</td>                    
+                    <td>
+                        <button class="btn btn-secondary" @onclick="@(()=>Sua(@x.Id))">Sửa</button>
+                        <button class="btn btn-danger" @onclick="@(()=>Xoa(@x.Id))">Xóa</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

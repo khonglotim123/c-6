@@ -1,0 +1,40 @@
+﻿@page "/updatemonhoc/{id:int}"
+
+@if (sv == null)
+{
+    <div>Loadding 99%...</div>
+}
+else
+{
+    <h3>Sửa môn học @sv.TenMon</h3>
+
+    <EditForm Model="sv" OnValidSubmit="SubmitSinhVien">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="TenSinhVien">Mã môn</label>
+            <input class="form-control" @bind-value="sv.Ma" />
+            <ValidationMessage For="()=>sv.Ma"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Tên môn</label>
+            <input class="form-control" @bind-value="sv.TenMon" />
+            <ValidationMessage For="()=>sv.TenMon"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Trường</label>
+            <InputSelect class="form-control" @bind-Value="sv.IdNghanh">
+                <option>Chọn trường</option>
+                @foreach (var item in lsttr)
+                    {
+                        if (sv.IdNghanh != null && sv.IdNghanh == item.Id)
+                        {
+                        <option value="@item.Id">@item.TenNghanh</option>
+                        }
+                    <option value="@item.Id">@item.TenNghanh</option>
+                    }
+            </InputSelect>
+            <ValidationMessage For="()=>sv.IdNghanh"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </EditForm>
+}

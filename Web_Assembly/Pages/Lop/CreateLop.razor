@@ -1,0 +1,29 @@
+﻿@page "/createlop"
+
+<h3>Thêm mới lớp</h3>
+
+<EditForm Model="sv" OnValidSubmit="SubmitSinhVien">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label for="TenSinhVien">Mã nghành</label>
+        <input class="form-control" @bind-value="sv.Ma" />
+        <ValidationMessage For="()=>sv.Ma"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="TenSinhVien">Tên nghành</label>
+        <input class="form-control" @bind-value="sv.TenLop" />
+        <ValidationMessage For="()=>sv.TenLop"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="TenSinhVien">Trường</label>
+        <InputSelect class="form-control" @bind-Value="sv.IdTruong">
+            <option>Chọn trường</option>
+            @foreach (var item in lsttr)
+            {
+                <option value="@item.Id">@item.TenTruong</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="()=>sv.IdTruong"></ValidationMessage>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm mới</button>
+</EditForm>

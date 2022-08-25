@@ -1,0 +1,65 @@
+﻿@page "/viewsinhvien"
+<h3>Danh sách Sinh viên</h3>
+
+<div class="row pb-2">
+    <input class="form-control col-md-4 m-3" @bind-value="seach" />
+    <button class="btn btn-primary m-3" @onclick="(()=>Timkiem(seach))"> Tìm kiếm </button>
+    <button class="btn btn-primary m-3" type="button" @onclick="Themmoi">Thêm mới</button>
+</div>
+@if (lstsv == null)
+{
+    <div>Loadding 99%...</div>
+}
+@if (lstsv != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã sinh viên</th>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Email</th>
+                <th>PassWord</th>
+                <th>Lớp</th>
+                <th>Nghành</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in lstsv)
+            {
+                <tr>
+                    <td>@x.MaSV</td>
+                    <td>@x.Ten</td>
+                    <td>@x.NgaySinh.ToString("dd/MM/yyy")</td>
+                    <td>@x.Email</td>
+                    <td typeof="password">@x.PassWord</td>
+                    @foreach (var item in lstlop)
+                    {
+                        if (x.IdLop == item.Id)
+                        {
+                            <td>@item.TenLop</td>
+                        }
+                    }
+                    @foreach (var item in lstnghanh)
+                    {
+                        if (x.IdNghanh == item.Id)
+                        {
+                            <td>@item.TenNghanh</td>
+                        }
+                    }
+                    <td>
+                        <button class="btn btn-secondary" @onclick="@(()=>Sua(@x.Id))">Sửa</button>
+                        <button class="btn btn-danger" @onclick="@(()=>Xoa(@x.Id))">Xóa</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>   
+}
+
+
+
+
+
+

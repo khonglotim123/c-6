@@ -1,0 +1,83 @@
+﻿@page "/updatesinhvien/{id:int}"
+
+
+@if (sv == null)
+{
+    <div>Loadding 99 % .....</div>
+}
+else
+{
+    <h3>Sửa sinh viên @sv.Ten</h3>
+    <EditForm Model="sv" OnValidSubmit="SubmitSinhVien">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="TenSinhVien">Họ sinh viên</label>
+                <InputText class="form-control" @bind-Value="sv.Ho"></InputText>
+                <ValidationMessage For="()=>sv.Ho"></ValidationMessage>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="TenSinhVien">Tên đệm sinh viên</label>
+                <InputText class="form-control" @bind-Value="sv.TenDem"></InputText>
+                <ValidationMessage For="()=>sv.TenDem"></ValidationMessage>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="TenSinhVien">Tên sinh viên</label>
+                <InputText class="form-control" @bind-Value="sv.Ten"></InputText>
+                <ValidationMessage For="()=>sv.Ten"></ValidationMessage>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Mã sinh viên</label>
+            <input class="form-control" @bind-value="sv.MaSV" />
+            <ValidationMessage For="()=>sv.MaSV"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Ngày Sinh</label>
+            <input type="date" class="form-control" @bind-value="sv.NgaySinh" />
+            <ValidationMessage For="()=>sv.NgaySinh"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Email</label>
+            <input type="email" class="form-control" @bind-value="sv.Email" />
+            <ValidationMessage For="()=>sv.Email"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Pass word</label>
+            <input class="form-control" type="password" @bind-value="sv.PassWord" />
+            <ValidationMessage For="()=>sv.PassWord"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="GioiTinh">Lớp</label>
+            <InputSelect id="changeIsActive" class="form-control" @bind-Value="sv.IdLop">
+                @foreach (var x in lstlop)
+                    {
+                        if (sv.IdLop == x.Id)
+                        {
+                        <option value="@x.Id">@x.TenLop</option>
+                        }
+                    <option value="@x.Id">@x.TenLop</option>
+                    }
+            </InputSelect>
+            <ValidationMessage For="()=>sv.IdLop"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="GioiTinh">Nghành</label>
+            <InputSelect id="changeIsActive" class="form-control" @bind-Value="sv.IdNghanh">
+                @foreach (var x in lstnghanh)
+                    {
+                        if (sv.IdNghanh == x.Id)
+                        {
+                        <option value="@x.Id">@x.TenNghanh</option>
+                        }
+                    <option value="@x.Id">@x.TenNghanh</option>
+                    }
+
+            </InputSelect>
+            <ValidationMessage For="()=>sv.IdNghanh"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </EditForm>
+}
+
+

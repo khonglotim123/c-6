@@ -1,0 +1,43 @@
+﻿@page "/updatelop/{id:int}"
+
+
+
+@if (sv == null)
+{
+    <div>Loadding 99%...</div>
+}
+else
+{
+    <h3>Sửa lớp @sv.TenLop</h3>
+
+    <EditForm Model="sv" OnValidSubmit="SubmitSinhVien">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="TenSinhVien">Mã lớp</label>
+            <input class="form-control" @bind-value="sv.Ma" />
+            <ValidationMessage For="()=>sv.Ma"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Tên lớp</label>
+            <input class="form-control" @bind-value="sv.TenLop" />
+            <ValidationMessage For="()=>sv.TenLop"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Nghành</label>
+            <InputSelect class="form-control" @bind-Value="sv.IdTruong">
+                <option>Chọn nghành</option>
+                @foreach (var item in lsttr)
+                    {
+                        if (sv.IdTruong != null && sv.IdTruong == item.Id)
+                        {
+                        <option value="@item.Id">@item.TenTruong</option>
+                        }
+                    <option value="@item.Id">@item.TenTruong</option>
+                    }
+            </InputSelect>
+            <ValidationMessage For="()=>sv.IdTruong"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </EditForm>
+}
+

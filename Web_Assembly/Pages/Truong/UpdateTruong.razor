@@ -1,0 +1,28 @@
+﻿@page "/updatetruong/{id:int}"
+
+
+
+@if (sv == null)
+{
+    <div>Loadding 99%...</div>
+}
+else
+{
+    <h3>Sửa @sv.TenTruong</h3>
+
+    <EditForm Model="sv" OnValidSubmit="SubmitSinhVien">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="TenSinhVien">Mã trường</label>
+            <input class="form-control" @bind-value="sv.Ma" />
+            <ValidationMessage For="()=>sv.Ma"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label for="TenSinhVien">Tên trường</label>
+            <input class="form-control" @bind-value="sv.TenTruong" />
+            <ValidationMessage For="()=>sv.TenTruong"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+
+    </EditForm>
+}
